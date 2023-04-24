@@ -44,6 +44,7 @@
             detalleToolStripMenuItem = new ToolStripMenuItem();
             actualizarToolStripMenuItem = new ToolStripMenuItem();
             eliminarToolStripMenuItem = new ToolStripMenuItem();
+            refrescarToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             itemContextMenuStrip.SuspendLayout();
             SuspendLayout();
@@ -84,7 +85,7 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { nuevoToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { nuevoToolStripMenuItem, refrescarToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
@@ -147,6 +148,13 @@
             eliminarToolStripMenuItem.Text = "Eliminar";
             eliminarToolStripMenuItem.Click += DeleteToolStripMenuItem_Click;
             // 
+            // refrescarToolStripMenuItem
+            // 
+            refrescarToolStripMenuItem.Name = "refrescarToolStripMenuItem";
+            refrescarToolStripMenuItem.Size = new Size(67, 20);
+            refrescarToolStripMenuItem.Text = "Refrescar";
+            refrescarToolStripMenuItem.Click += RefreshToolStripMenuItem_Click;
+            // 
             // MyBooks
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -181,5 +189,6 @@
         private ToolStripMenuItem actualizarToolStripMenuItem;
         private ToolStripMenuItem eliminarToolStripMenuItem;
         private ToolStripMenuItem detalleToolStripMenuItem;
+        private ToolStripMenuItem refrescarToolStripMenuItem;
     }
 }

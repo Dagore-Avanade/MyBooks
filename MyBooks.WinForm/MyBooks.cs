@@ -63,7 +63,13 @@ namespace MyBooks.WinForm
 
         private void UpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var item = listViewBooks.SelectedItems[0];
+            var book = (Book)item.Tag;
+            var result = new NewBook(book).ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                LoadBooks();
+            }
         }
 
         private void DetailToolStripMenuItem_Click(object sender, EventArgs e)
@@ -92,6 +98,11 @@ namespace MyBooks.WinForm
         private void NewBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new NewBook().ShowDialog();
+            LoadBooks();
+        }
+
+        private void RefreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             LoadBooks();
         }
     }

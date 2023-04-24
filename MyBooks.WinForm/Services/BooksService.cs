@@ -36,6 +36,22 @@ namespace MyBooks.WinForm.Services
             libraryContext.Books.Add(book);
             libraryContext.SaveChanges();
         }
+        public void Update(Book book)
+        {
+            Book? toUpdate = libraryContext.Books.FirstOrDefault(b => b.BookId == book.BookId); 
+            if (toUpdate is not null)
+            {
+                toUpdate.Title = book.Title;
+                toUpdate.PublicationDate = book.PublicationDate;
+                toUpdate.NumberOfPages = book.NumberOfPages;
+                toUpdate.AuthorId = book.AuthorId;
+                toUpdate.GenreId = book.GenreId;
+                toUpdate.Description = book.Description;
+
+                libraryContext.Update(toUpdate);
+                Save();
+            }
+        }
         void Save()
         {
             libraryContext.SaveChanges();

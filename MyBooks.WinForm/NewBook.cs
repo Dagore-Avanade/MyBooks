@@ -18,8 +18,8 @@ namespace MyBooks.WinForm
         readonly AuthorsService authorsService = new();
         readonly GenresService genresService = new();
         readonly BooksService booksService = new();
-        bool isUpdate;
-        int bookId;
+        readonly bool isUpdate;
+        readonly int bookId;
         public NewBook()
         {
             InitializeComponent();
@@ -27,6 +27,28 @@ namespace MyBooks.WinForm
             bookId = -1;
             authorComboBox.Items.AddRange(authorsService.AllViewModel());
             genreComboBox.Items.AddRange(genresService.AllViewModel());
+        }
+
+        public NewBook(Book book)
+        {
+            InitializeComponent();
+            isUpdate = true;
+            bookId = book.BookId;
+            authorComboBox.Items.AddRange(authorsService.AllViewModel());
+            genreComboBox.Items.AddRange(genresService.AllViewModel());
+
+            titleTextBox.Text = book.Title;
+            publicationDateTimePicker.Value = book.PublicationDate;
+            publicationDateTimePicker.Checked = true;
+            numberOfPagesNumericUpDown.Value = book.NumberOfPages;
+            authorComboBox.SelectedItem = authorComboBox.Items.Cast<AuthorViewModel>()
+                .Where(author => author.AuthorId == book.AuthorId)
+                .FirstOrDefault();
+            genreComboBox.SelectedItem = genreComboBox.Items.Cast<GenreViewModel>()
+                .Where(genre => genre.GenreId == book.GenreId)
+                .FirstOrDefault();
+            descriptionTextBox.Text = book.Description;
+            addBtn.Text = "Actualizar";
         }
 
         private void AddBtn_Click(object sender, EventArgs e)
@@ -55,11 +77,13 @@ namespace MyBooks.WinForm
                     if (isUpdate)
                     {
                         newBook.BookId = bookId;
+                        booksService.Update(newBook);
                     }
                     else
                     {
                         booksService.Add(newBook);
                     }
+                    DialogResult = DialogResult.OK;
                     Close();
                 }
                 catch
